@@ -1,0 +1,20 @@
+{
+  "name": "poker-ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "keywords": [
+    "killer",
+    "robot",
+    "node",
+    "js"
+  ],
+  "author": "Team Vishrugm",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.2.0"
+  }
+}
