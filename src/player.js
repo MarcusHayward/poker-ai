@@ -1,10 +1,11 @@
 class Player {
     constructor(name) {
         this.name = name;
+        this.hand = [];
     }
 
-    addhand(hand) {
-        this.hand = hand;
+    receiveCard(card) {
+        this.hand.push(card);
     }
 }
 
