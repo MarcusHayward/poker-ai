@@ -1,6 +1,8 @@
 const Dealer = require('./dealer');
 const Deck = require('./deck');
-const Rank = require('./rank');
+
+const PairRank = require('./rank/pair');
+const HighCardRank = require('./rank/high-card');
 
 class Game {
   constructor(players) {
@@ -15,30 +17,39 @@ class Game {
     this.dealer.dealTo(this.players[0]);
     this.dealer.dealTo(this.players[1]);
 
-    //console.log(this.players[0].name);
-    //console.log(this.players[0].hand);
-    //console.log(this.players[1].name);
-    //console.log(this.players[1].hand);
+    console.log(this.players[0].name);
+    console.log(this.players[0].hand);
+    console.log('')
+    console.log(this.players[1].name);
+    console.log(this.players[1].hand);
+    console.log('')
 
     this.dealer.addFlop();
-    //console.log(this.dealer.communityCards.cards);
-    //console.log();
 
     this.dealer.addTurn();
-    //console.log(this.dealer.communityCards.cards);
-    //console.log();
 
     this.dealer.addRiver();
-    //console.log(this.dealer.communityCards.cards);
-    //console.log();
-    let playerOneRank = new Rank(
+
+    console.log('Community cards')
+    console.log(this.dealer.communityCards.cards);
+    console.log();
+
+    let playerOneRank = new PairRank(
       this.players[0].hand,
       this.dealer.communityCards.cards
     );
-    let playerTwoRank = new Rank(
+    let playerTwoRank = new PairRank(
       this.players[1].hand,
       this.dealer.communityCards.cards
     );
+
+    console.log('')
+
+    if (playerOneRank.isBetterThan(playerTwoRank)) {
+      console.log(this.players[0].name + " wins")
+    } else {
+      console.log(this.players[1].name + " wins")
+    }
   }
 }
 
