@@ -10,16 +10,17 @@ class PairRank {
   }
 
   findPairs() {
-    let cards = this.playerCards.concat(this.communityCards);
+    let cards = RankUtils.sortCards(this.playerCards.concat(this.communityCards))
     
-    let equalCards = RankUtils.sortCards(cards).reduce((ac, card) => {
-        ac[card.value] = ac.hasOwnProperty(card.value) ? ac[card.value].concat([card]) : [card]
-        return ac
-    }, {})
+    let equalCards = cards.reduce((map, card) => {
+        if (!map.has(card.value)) {
+            map.set(card.value, [])
+        }
+        map.get(card.value).push(card);
+        return map
+    }, new Map)
 
-    let pairs = Object.entries(equalCards).filter(e => {
-        return e[1].length == 2
-    }).map( e => e[1])
+    let pairs = Array.from(equalCards.values()).filter(e => e[1].length == 2)
 
     return pairs 
   }
