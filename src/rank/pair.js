@@ -2,6 +2,7 @@ const Hand = require('../hand');
 const CommunityCards = require('../community-cards');
 const GC = require('../game-constants');
 const RankUtils = require('../rank-utils');
+const HighCard = require('./high-card');
 
 class PairRank {
   constructor(playerCards, communityCards) {
@@ -20,25 +21,33 @@ class PairRank {
         return map
     }, new Map)
 
-    let pairs = Array.from(equalCards.values()).filter(e => e[1].length == 2)
+    let pairs = Array.from(equalCards.entries()).filter(e => e[1].length === 2).map(e => e[0])
 
-    return pairs 
+    let theRest = Array.from(equalCards.entries()).filter(e => e[1].length !== 2).map(e => e[1][0])
+
+      // Evaluating on 5 remaining cards, should only inspect top 3. If all the same, game is a draw
+    return { 'pairs': pairs, 'highCardRank': new HighCard(theRest, []) }
   }
 
   isBetterThan(otherRank) {
-    var myTopFive = this.findPairs()
-    var otherTopFive = otherRank.findPairs()
+    var myRankData = this.findPairs()
+    var otherRankData = otherRank.findPairs()
     console.log("player 1")
-    console.log(myTopFive)
+    console.log(myRankData)
     console.log("")
     console.log("player 2")
-    console.log(otherTopFive)
+    console.log(otherRankData)
 
-    if (myTopFive.length == otherTopFive.length) {
-        return true
+    if (myRankData.pairs.length == otherRankData.pairs.length && myRankData.pairs.length == 1) {
+
+        if (GC.RANK.indexOf(myRankData.pairs[0]) === GC.RANK.indexOf(otherRankData.pairs[0])) {
+            return myRankData.highCardRank.isBetterThan(otherRankData.highCardRank)
+        }
+
+        return GC.RANK.indexOf(myRankData.pairs[0]) > GC.RANK.indexOf(otherRankData.pairs[0])
     } 
     
-    return myTopFive.length > otherTopFive.length
+    return myRankData.pairs.length > otherRankData.pairs.length
   }
 }
 
