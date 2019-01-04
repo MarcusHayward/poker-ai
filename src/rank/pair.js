@@ -32,11 +32,6 @@ class PairRank {
   isBetterThan(otherRank) {
     var myRankData = this.findPairs()
     var otherRankData = otherRank.findPairs()
-    console.log("player 1")
-    console.log(myRankData)
-    console.log("")
-    console.log("player 2")
-    console.log(otherRankData)
 
     if (myRankData.pairs.length == otherRankData.pairs.length && myRankData.pairs.length == 1) {
 

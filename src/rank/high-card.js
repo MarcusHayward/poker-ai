@@ -17,8 +17,7 @@ class HighCardRank {
   isBetterThan(otherRank) {
     var myTopFive = this.getPlayerTopFive()
     var otherTopFive = otherRank.getPlayerTopFive()
-    console.log(myTopFive)
-    console.log(otherTopFive)
+
     for (var i = 0; i < myTopFive.length; i++) {
       if (GC.RANK.indexOf(myTopFive[i].value) == GC.RANK.indexOf(otherTopFive[i].value)) {
         continue

@@ -5,8 +5,8 @@ const PairRank = require('./rank/pair');
 const HighCardRank = require('./rank/high-card');
 
 class Game {
-  constructor(players) {
-    this.deck = new Deck();
+  constructor(players, deck) {
+    this.deck = deck
     this.players = players;
     this.dealer = new Dealer(this.deck, this.players[0], this.players[1]);
   }
@@ -30,10 +30,6 @@ class Game {
 
     this.dealer.addRiver();
 
-    console.log('Community cards')
-    console.log(this.dealer.communityCards.cards);
-    console.log();
-
     let playerOneRank = new PairRank(
       this.players[0].hand,
       this.dealer.communityCards.cards
@@ -50,6 +46,7 @@ class Game {
     } else {
       console.log(this.players[1].name + " wins")
     }
+
   }
 }
 
