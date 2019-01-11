@@ -34,7 +34,6 @@ class PairRank {
     var otherRankData = otherRank.findPairs()
 
     if (myRankData.pairs.length == otherRankData.pairs.length && myRankData.pairs.length == 1) {
-
         if (GC.RANK.indexOf(myRankData.pairs[0]) === GC.RANK.indexOf(otherRankData.pairs[0])) {
             return myRankData.highCardRank.isBetterThan(otherRankData.highCardRank)
         }

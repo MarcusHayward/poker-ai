@@ -1,5 +1,4 @@
 const Dealer = require('./dealer');
-const Deck = require('./deck');
 
 const PairRank = require('./rank/pair');
 const HighCardRank = require('./rank/high-card');
