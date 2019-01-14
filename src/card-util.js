@@ -1,11 +1,11 @@
-const Card = require('../src/card')
+const Card = require('./card')
 
 function shortSuitToLong(shortSuit) {
     switch (shortSuit) {
-        case 'h': return 'Heart'
-        case 'd': return 'Diamond'
-        case 's': return 'Spade'
-        case 'c': return 'Club'
+        case 'h': return 'Hearts'
+        case 'd': return 'Diamonds'
+        case 's': return 'Spades'
+        case 'c': return 'Clubs'
     }
 }
 
