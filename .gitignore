@@ -65,3 +65,5 @@ data/
 
 # Mac OS
 .DS_Store
+package-lock.json
+.idea/
