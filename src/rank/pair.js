@@ -25,8 +25,7 @@ class PairRank {
 
     let theRest = Array.from(equalCards.entries()).filter(e => e[1].length !== 2).map(e => e[1][0])
 
-      // Evaluating on 5 remaining cards, should only inspect top 3. If all the same, game is a draw
-    return { 'pairs': pairs, 'highCardRank': new HighCard(theRest, []) }
+    return { 'pairs': pairs, 'highCardRank': new HighCard(theRest, [], (5 - pairs.length * 2)) }
   }
 
   isBetterThan(otherRank) {
