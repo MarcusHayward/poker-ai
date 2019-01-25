@@ -10,20 +10,23 @@ class HighCardRank {
     this.maxNumberOfCardsToConsider = maxNumberOfCardsToConsider;
   }
 
-  highCards() {
+  getHand() {
     let cards = this.playerCards.concat(this.communityCards);
-    return RankUtils.sortCards(cards).slice(0, this.maxNumberOfCardsToConsider);
+    return new HighCardHand(RankUtils.sortCards(cards).slice(0, this.maxNumberOfCardsToConsider));
+  }
+}
+
+class HighCardHand {
+  constructor(orderedCards) {
+    this.orderedCards = orderedCards;
   }
 
-  isBetterThan(otherRank) {
-    var myHighCards = this.highCards()
-    var otherHighCards = otherRank.highCards()
-
-    for (var i = 0; i < myHighCards.length; i++) {
-      if (GC.RANK.indexOf(myHighCards[i].value) == GC.RANK.indexOf(otherHighCards[i].value)) {
+  isBetterThan(otherHand) {
+    for (var i = 0; i < this.orderedCards.length; i++) {
+      if (GC.RANK.indexOf(this.orderedCards[i].value) == GC.RANK.indexOf(otherHand.orderedCards[i].value)) {
         continue
       }
-      return GC.RANK.indexOf(myHighCards[i].value) > GC.RANK.indexOf(otherHighCards[i].value)
+      return GC.RANK.indexOf(this.orderedCards[i].value) > GC.RANK.indexOf(otherHand.orderedCards[i].value)
     }
 
     //draw - fix me
@@ -31,4 +34,6 @@ class HighCardRank {
   }
 }
 
-module.exports = HighCardRank;
+
+
+module.exports = {HighCardRank: HighCardRank, HighCardHand: HighCardHand};
