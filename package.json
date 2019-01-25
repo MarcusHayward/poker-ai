@@ -8,7 +8,9 @@
     "test": "jest"
   },
   "jest": {
-    "roots": ["./__tests__"],
+    "roots": [
+      "./__tests__"
+    ],
     "testEnvironment": "node"
   },
   "keywords": [
