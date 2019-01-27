@@ -1,7 +1,3 @@
-const Hand = require('../hand');
-const CommunityCards = require('../community-cards');
-const GC = require('../game-constants');
-const RankUtils = require('../rank-utils');
 const HighCard = require('./high-card');
 
 class FlushRank {
