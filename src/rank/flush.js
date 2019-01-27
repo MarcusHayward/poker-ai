@@ -23,7 +23,7 @@ class FlushRank {
             accumulator[allCards[i].suit].push(allCards[i]);
 
             if (accumulator[allCards[i].suit].length == 5) {
-                return {'flushSuit': allCards[i].suit, 'highCardRank': new HighCard(accumulator[allCards[i].suit], 5)}
+                return {'flushSuit': allCards[i].suit, 'highCards': (new HighCard.Rank(accumulator[allCards[i].suit], 5)).getHand()}
             }
         }
 
@@ -43,7 +43,7 @@ class FlushRank {
             return true
         }
 
-        return myFlush.highCardRank.isBetterThan(theirFlush.highCardRank)
+        return myFlush.highCards.isBetterThan(theirFlush.highCards)
     }
 }
 

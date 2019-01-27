@@ -25,7 +25,7 @@ class PairRank {
 
     let theRest = Array.from(equalCards.entries()).filter(e => e[1].length !== 2).map(e => e[1][0])
 
-    return { 'pairs': pairs, 'highCardRank': new HighCard(theRest, [], (5 - pairs.length * 2)) }
+    return { 'pairs': pairs, 'highCards': (new HighCard.Rank(theRest, [], (5 - pairs.length * 2))).getHand() }
   }
 
   isBetterThan(otherRank) {
@@ -34,7 +34,7 @@ class PairRank {
 
     if (myRankData.pairs.length == otherRankData.pairs.length && myRankData.pairs.length == 1) {
         if (GC.RANK.indexOf(myRankData.pairs[0]) === GC.RANK.indexOf(otherRankData.pairs[0])) {
-            return myRankData.highCardRank.isBetterThan(otherRankData.highCardRank)
+            return myRankData.highCards.isBetterThan(otherRankData.highCards)
         }
 
         return GC.RANK.indexOf(myRankData.pairs[0]) > GC.RANK.indexOf(otherRankData.pairs[0])

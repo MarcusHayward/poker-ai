@@ -1,10 +1,9 @@
-const Hand = require('../hand');
 const CommunityCards = require('../community-cards');
 const GC = require('../game-constants');
 const RankUtils = require('../rank-utils');
 
-class HighCardRank {
-  constructor(playerCards, communityCards, maxNumberOfCardsToConsider) {
+class Rank {
+  constructor(playerCards, communityCards, maxNumberOfCardsToConsider = 5) {
     this.playerCards = playerCards;
     this.communityCards = communityCards;
     this.maxNumberOfCardsToConsider = maxNumberOfCardsToConsider;
@@ -12,11 +11,11 @@ class HighCardRank {
 
   getHand() {
     let cards = this.playerCards.concat(this.communityCards);
-    return new HighCardHand(RankUtils.sortCards(cards).slice(0, this.maxNumberOfCardsToConsider));
+    return new Hand(RankUtils.sortCards(cards).slice(0, this.maxNumberOfCardsToConsider));
   }
 }
 
-class HighCardHand {
+class Hand {
   constructor(orderedCards) {
     this.orderedCards = orderedCards;
   }
@@ -36,4 +35,4 @@ class HighCardHand {
 
 
 
-module.exports = {HighCardRank: HighCardRank, HighCardHand: HighCardHand};
+module.exports = {Rank: Rank, Hand: Hand};
