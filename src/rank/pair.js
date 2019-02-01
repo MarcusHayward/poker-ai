@@ -23,23 +23,27 @@ class PairRank {
 
     let theRest = Array.from(equalCards.entries()).filter(e => e[1].length !== 2).map(e => e[1][0])
 
-    return { 'pairs': pairs, 'highCards': (new HighCard.Rank(theRest, [], (5 - pairs.length * 2))).getHand() }
-  }
+    const highCards = (new HighCard.Rank(theRest, [], (5 - pairs.length * 2))).getHand();
 
-  isBetterThan(otherRank) {
-    var myRankData = this.findPairs()
-    var otherRankData = otherRank.findPairs()
-
-    if (myRankData.pairs.length == otherRankData.pairs.length && myRankData.pairs.length == 1) {
-        if (GC.RANK.indexOf(myRankData.pairs[0]) === GC.RANK.indexOf(otherRankData.pairs[0])) {
-            return myRankData.highCards.isBetterThan(otherRankData.highCards)
-        }
-
-        return GC.RANK.indexOf(myRankData.pairs[0]) > GC.RANK.indexOf(otherRankData.pairs[0])
-    } 
-    
-    return myRankData.pairs.length > otherRankData.pairs.length
+    return new Hand(pairs, highCards);
   }
 }
 
-module.exports = PairRank;
+class Hand {
+  constructor(pairs, highCards) {
+    this.pairs = pairs;
+    this.highCards = highCards
+  }
+
+  isBetterThan(otherHand) {
+    if (this.pairs.length == otherHand.pairs.length && this.pairs.length == 1) {
+        if (GC.RANK.indexOf(this.pairs[0]) === GC.RANK.indexOf(otherHand.pairs[0])) {
+            return this.highCards.isBetterThan(otherHand.highCards)
+        }
+        return GC.RANK.indexOf(this.pairs[0]) > GC.RANK.indexOf(otherHand.pairs[0])
+    } 
+    return this.pairs.length > otherHand.pairs.length
+  }
+}
+
+module.exports = { PairRank: PairRank, Hand: Hand };
