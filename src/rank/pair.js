@@ -8,7 +8,7 @@ class PairRank {
     this.communityCards = communityCards;
   }
 
-  findPairs() {
+  getHand() {
     let cards = RankUtils.sortCards(this.playerCards.concat(this.communityCards))
     
     let equalCards = cards.reduce((map, card) => {
